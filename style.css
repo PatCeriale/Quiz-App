@@ -1,3 +1,40 @@
 body {
   background-color: salmon;
 }
+
+h1 {
+  /* star wars font */
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.gameBoard {
+  background-image: url("https://p0.pikrepo.com/preview/42/482/clear-drinking-glass-with-beer.jpg");
+  width: 100%;
+  height: auto;
+  min-height: 75vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  flex: auto;
+}
+
+.scoreBoard {
+  min-height: 75vh;
+  background: hotpink;
+}
+
+.startButton {
+  background-color: green;
+  border: white;
+  border-style: solid;
+  border-width: 3px;
+  border-radius: 5%;
+  color: azure;
+  padding: 30px, 70px;
+  margin: auto;
+  text-align: center;
+  font-size: x-large;
+  display: inline-block;
+  text-decoration: underline;
+}
