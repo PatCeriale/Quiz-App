@@ -1,5 +1,11 @@
 body {
   background-color: salmon;
+  background-image: url(https://imbibeinc.com/wp-content/uploads/2019/02/close_up_of_hops_1200x1200.jpg);
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  flex: auto;
 }
 
 h1 {
@@ -7,11 +13,14 @@ h1 {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bolder;
   text-align: center;
+  color: antiquewhite;
 }
-
+.timer {
+  color: antiquewhite;
+}
 .gameBoard {
   background-image: url("https://p0.pikrepo.com/preview/42/482/clear-drinking-glass-with-beer.jpg");
-  width: 100%;
+  width: 80vw;
   height: auto;
   min-height: 75vh;
   background-repeat: no-repeat;
@@ -20,8 +29,13 @@ h1 {
 }
 
 .scoreBoard {
+  background-image: url("https://st4.depositphotos.com/11233746/20268/i/450/depositphotos_202681390-stock-photo-partial-view-people-clinking-glasses.jpg");
+  width: 80vw;
+  height: auto;
   min-height: 75vh;
-  background: hotpink;
+  background-repeat: no-repeat;
+  background-size: cover;
+  flex: auto;
 }
 
 .startButton {
