@@ -1,5 +1,11 @@
 var gameBoard = document.querySelector(".gameBoard");
 var scoreBoard = document.querySelector(".scoreBoard");
+var question = document.querySelector(".question");
+var answers = document.querySelector(".answers");
+var buttonA = document.querySelector(".buttonA");
+var buttonB = document.querySelector(".buttonB");
+var buttonC = document.querySelector(".buttonC");
+var buttonD = document.querySelector(".buttonD");
 var startButton = document.querySelector(".startButton");
 var timer = document.querySelector(".timer");
 var score = 0;
@@ -8,7 +14,7 @@ var timeLeft = 3; //TODO: Change back to 75s
 
 // Hide Score Board container until quiz is completed
 scoreBoard.style.display = "none";
-// Set up countdown timer starting at 75 seconds (timeLeft)
+// Set up countdown timer that stops at "timeLeft"
 function countdownClock() {
   var timerInterval = setInterval(function () {
     timeLeft--;
@@ -172,12 +178,14 @@ function startQuiz() {
 function getQuestions() {
   //   myQuestions++;
   //create h1
-  gameBoard.innerHTML = myQuestions[qCounter].q;
-  //create p tag or something with buttons a, b, c, d
-  //Loop answers x4 for each answer associated with each button
-  for (let i = 0; i < length < 5; i++) {
-    gameBoard.innerHTML = myQuestions[qCounter].answers[i];
-  }
+  question.innerHTML = myQuestions[qCounter].q;
+  answers.innerHTML = myQuestions[qCounter].answers;
+  //Loop answers x4 for each answer associated with each button?
+  //for loop putting answers[i] to button!, buttonB, buttonC, buttonD?
+  //   for (let i = 0; i < length < 5; i++) {
+  //     gameBoard.innerHTML = myQuestions[qCounter].answers[i];
+  //   }
+  //
   // document.getElementbyID
   //for each function myQuestion.questionOne.answers
   //get current question from array
@@ -228,6 +236,7 @@ function endQuiz() {
 // TODO: "Start quiz" button starts the quiz on Game Board and hides the button itself.
 startButton.addEventListener("click", function () {
   startButton.style.display = "none";
+  gameBoard.style.background = "white";
   countdownClock();
   startQuiz();
   getQuestions();

@@ -28,6 +28,9 @@ h1 {
   flex: auto;
 }
 
+.question {
+  color: black;
+}
 .scoreBoard {
   background-image: url("https://st4.depositphotos.com/11233746/20268/i/450/depositphotos_202681390-stock-photo-partial-view-people-clinking-glasses.jpg");
   width: 80vw;
@@ -46,10 +49,10 @@ h1 {
   border-radius: 5%;
   color: azure;
   padding: 30px, 70px;
-  margin: 50px;
+  margin: 25px;
   text-align: center;
   font-size: x-large;
-  display: inline-block;
+  /* display: inline-block; */
   text-decoration: underline;
 }
 .quizButton {
@@ -60,9 +63,10 @@ h1 {
   border-radius: 5%;
   color: azure;
   padding: 30px, 70px;
-  margin: 50px;
+  margin: 25px;
   text-align: center;
   font-size: x-large;
   display: inline-block;
   text-decoration: underline;
+  flex: auto;
 }
