@@ -21,15 +21,23 @@
         <h1 class="question"></h1>
         <!-- Interior of Game Board where answers will appear -->
         <p class="answers">
-            <button class="buttonA quizButton">A</button>
-            <button class="buttonB quizButton">B</button>
-            <button class="buttonC quizButton">C</button>
-            <button class="buttonD quizButton">D</button>
+            <button class="buttonA quizButton" data-index=0>A</button>
+            <button class="buttonB quizButton" data-index=1>B</button>
+            <button class="buttonC quizButton" data-index=2>C</button>
+            <button class="buttonD quizButton" data-index=3>D</button>
         </p>
     </div>
     <div class="container scoreBoard">
-
+        <form>
+            <div class="form-group">
+                <label for="exampleInputName">Your name:</label>
+                <input type="name" class="form-control" id="exampleInputName" aria-describedby="nameHelp"
+                    placeholder="Enter name here">
+            </div>
+            <button id="submitBtn" type="submit" class="btn btn-primary">Submit</button>
+        </form>
     </div>
+    <!-- <button id="test-btn">Test loop thing</button> -->
     <!-- Bootstrap JavaScript tags-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

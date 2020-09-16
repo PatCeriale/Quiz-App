@@ -12,8 +12,9 @@ var score = 0;
 var qCounter = 0;
 var timeLeft = 3; //TODO: Change back to 75s
 
-// Hide Score Board container until quiz is completed
+// Hide Score Board container until quiz is completed, hide answer buttons until quiz is started
 scoreBoard.style.display = "none";
+answers.style.display = "none";
 // Set up countdown timer that stops at "timeLeft"
 function countdownClock() {
   var timerInterval = setInterval(function () {
@@ -32,7 +33,7 @@ const myQuestions = [
   {
     q: "What is not a style guideline of a West Coast India Pale Ale?",
     answers: ["Bitter", "Roasty", "Caramel", "Golden to amber color"],
-    correctAnswer: ["Roasty"],
+    correctAnswer: "Roasty",
   },
   {
     q: "What does butyric acid smell like?",
@@ -169,24 +170,20 @@ for (let i = 0; i < myQuestions.length; i++) {
 }
 // bttnOne.addEventListener("click", function)
 function startQuiz() {
-  score = 0;
   //   gameBoard.style.display = "none";
   // display questions
   //start/show timer
   //function = grab the questions
 }
 function getQuestions() {
-  //   myQuestions++;
-  //create h1
+  //Places the current question in the h1 on Game Board and answers to a corresponding and clickable button
   question.innerHTML = myQuestions[qCounter].q;
-  answers.innerHTML = myQuestions[qCounter].answers;
+  buttonA.textContent = myQuestions[qCounter].answers[0];
+  buttonB.textContent = myQuestions[qCounter].answers[1];
+  buttonC.textContent = myQuestions[qCounter].answers[2];
+  buttonD.textContent = myQuestions[qCounter].answers[3];
   //Loop answers x4 for each answer associated with each button?
-  //for loop putting answers[i] to button!, buttonB, buttonC, buttonD?
-  //   for (let i = 0; i < length < 5; i++) {
-  //     gameBoard.innerHTML = myQuestions[qCounter].answers[i];
-  //   }
-  //
-  // document.getElementbyID
+
   //for each function myQuestion.questionOne.answers
   //get current question from array
   //show questions, title
@@ -195,9 +192,27 @@ function getQuestions() {
   // TODO:buttons exist on page prior to question?
   // TODO:create with the questions (div appended)?
 }
-function questionClick() {
-  // compare clicked question with correct answer myQuestion.qOne.correctAnswer
+
+function onAnswerClick(e) {
+  e.preventDefault();
+  const index = e.target.getAttribute("data-index");
+  if (
+    myQuestions[qCounter].correctAnswer === myQuestions[qCounter].answers[index]
+  ) {
+    score++;
+    console.log("this is correct");
+  } else {
+    timeLeft - 5;
+    console.log("this is incorrect");
+  }
+  qCounter++;
+  if (qCounter < myQuestions.length) {
+    getQuestions();
+  } else {
+    endQuiz();
+  }
 }
+
 function endQuiz() {
   if (timeLeft === 0) {
     scoreBoard.style.display = "block";
@@ -205,8 +220,6 @@ function endQuiz() {
   }
   //happens when time is up countdownClock
   //hide game board/show the score board
-  // scoreBoard.style.display = "block";
-  // gameBoard.style.display = "none";
 }
 
 // scoreBoard contain form for user name
@@ -235,11 +248,42 @@ function endQuiz() {
 
 // TODO: "Start quiz" button starts the quiz on Game Board and hides the button itself.
 startButton.addEventListener("click", function () {
+  score = 0;
   startButton.style.display = "none";
   gameBoard.style.background = "white";
+  answers.style.display = "block";
   countdownClock();
   startQuiz();
   getQuestions();
+  endQuiz();
   //startQuiz
 });
-endQuiz();
+
+buttonA.addEventListener("click", onAnswerClick);
+buttonB.addEventListener("click", onAnswerClick);
+buttonC.addEventListener("click", onAnswerClick);
+buttonD.addEventListener("click", onAnswerClick);
+
+// -----------------------
+
+// const testBtn = document.getElementById("test-btn");
+
+// let counter = 0;
+
+// testBtn.addEventListener("click", function (e) {
+//   e.preventDefault();
+//   if (counter < 5) {
+//     console.log(counter);
+//     counter++;
+//   } else {
+//     console.log("We made it out of the loop, bois!!");
+//   }
+// });
+//generate function, closure
+// function questionClick(index) {
+//   return function (e) {
+//     e.preventDefault();
+//     console.log("You pressed button with index", index);
+//   };
+// compare clicked question with correct answer myQuestion.qOne.correctAnswer
+//}
