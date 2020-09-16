@@ -46,7 +46,21 @@ h1 {
   border-radius: 5%;
   color: azure;
   padding: 30px, 70px;
-  margin: auto;
+  margin: 50px;
+  text-align: center;
+  font-size: x-large;
+  display: inline-block;
+  text-decoration: underline;
+}
+.quizButton {
+  background-color: green;
+  border: white;
+  border-style: solid;
+  border-width: 3px;
+  border-radius: 5%;
+  color: azure;
+  padding: 30px, 70px;
+  margin: 50px;
   text-align: center;
   font-size: x-large;
   display: inline-block;

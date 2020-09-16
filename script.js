@@ -3,12 +3,12 @@ var scoreBoard = document.querySelector(".scoreBoard");
 var startButton = document.querySelector(".startButton");
 var timer = document.querySelector(".timer");
 var score = 0;
+var qCounter = 0;
+var timeLeft = 3; //TODO: Change back to 75s
 
 // Hide Score Board container until quiz is completed
 scoreBoard.style.display = "none";
-// Set up countdown timer starting at 75 seconds
-var timeLeft = 5; //TODO: Change back to 75s
-
+// Set up countdown timer starting at 75 seconds (timeLeft)
 function countdownClock() {
   var timerInterval = setInterval(function () {
     timeLeft--;
@@ -20,22 +20,16 @@ function countdownClock() {
     }
   }, 1000);
 }
-// TODO: "Start quiz" button starts the quiz on Game Board and hides the button itself. (.onclick vs .addEventListener?)
-startButton.addEventListener("click", function () {
-  startButton.style.display = "none";
-  countdownClock();
-  //startQuiz
-});
 
 // TODO: (Loop) Display multiple choice question and answer:
 const myQuestions = [
   {
-    qOne: "What is not a style guideline of a West Coast India Pale Ale?",
+    q: "What is not a style guideline of a West Coast India Pale Ale?",
     answers: ["Bitter", "Roasty", "Caramel", "Golden to amber color"],
     correctAnswer: ["Roasty"],
   },
   {
-    qTwo: "What does butyric acid smell like?",
+    q: "What does butyric acid smell like?",
     answers: [
       "Baby diapers",
       "Used athletic socks",
@@ -45,27 +39,27 @@ const myQuestions = [
     correctAnswer: "Baby diapers",
   },
   {
-    qThree: "What is not true of a Mixed Culture Beer?",
+    q: "What is not true of a Mixed Culture Beer?",
     answers: ["Tart", "Funky", "Full-bodied", "Low bitterness"],
     correctAnswer: "Full-bodied",
   },
   {
-    qFour: "When a beer is oxidized, what does it taste like?",
+    q: "When a beer is oxidized, what does it taste like?",
     answers: ["Cardboard", "Metallic", "Baby vomit", "Horse blankets"],
     correctAnswer: "Cardboard",
   },
   {
-    qFive: "What does NOT affect beer negatively?",
+    q: "What does NOT affect beer negatively?",
     answers: [
       "Warm storage",
       "Oxygen at packaging",
       "Beer spoilage organisms",
-      "All of the above",
+      "None of the above",
     ],
-    correctAnswer: "All of the above",
+    correctAnswer: "None of the above",
   },
   {
-    qSix: "What is a Bohemian Pilsner?",
+    q: "What is a Bohemian Pilsner?",
     answers: [
       "Crisp",
       "Refreshing",
@@ -76,23 +70,18 @@ const myQuestions = [
       "Hop bomb that removes your ability to taste anything for the duration of James Cameron’s 'Avatar'",
   },
   {
-    qSeven:
+    q:
       "If hydrogen sulfide was present in your beer, what would it smell like?",
     answers: ["Rotten eggs", "Bubblegum", "Rusty metal", "Skunky"],
     correctAnswer: "Rotten eggs",
   },
   {
-    qEight: "What does diacetyl smell like?",
-    answers: [
-      "Movie theater popcorn",
-      "Green Apple",
-      "Crackers",
-      "Sasquatch dung",
-    ],
+    q: "What does diacetyl smell like?",
+    answers: ["Movie theater popcorn", "Green Apple", "Crackers", "Wet dog"],
     correctAnswer: "Movie theater popcorn",
   },
   {
-    qNine: "How wouldn't you describe a kölsch",
+    q: "How wouldn't you describe a kölsch",
     answers: [
       "Very pale to light gold color",
       "Mild fruitiness",
@@ -102,56 +91,59 @@ const myQuestions = [
     correctAnswer: "Low carbonation",
   },
   {
-    qTen: "How would you not describe a Barley Wine?",
+    q: "How would you not describe a Barley Wine?",
     answers: ["THICC body", "Sessionable", "8%+ ABV", "Is life"],
     correctAnswer: "Sessionable",
   },
   {
-    qEleven:
+    q:
       "What is not a part of the three-tier system for alcohol distribution created after Prohibition?",
     answers: ["Producer", "Retailer", "Customer", "Distributor"],
     correctAnswer: "Customer",
   },
   {
-    qTwelve: "What solution should not be used to clean a draft system?",
+    q: "What solution should not be used to clean a draft system?",
     answers: ["Caustic", "Acid", "Sanitizer", "Bleach"],
     correctAnswer: "Bleach",
   },
   {
-    qThirteen:
-      "Before and during fermentation, what is measured using a hydrometer?",
+    q: "Before and during fermentation, what is measured using a hydrometer?",
     answers: ["Gravity", "Alcohol percentage", "Hops", "Color"],
     correctAnswer: "Gravity",
   },
   {
-    qFourteen:
+    q:
       "What is the name of the device attached directly to the keg in order to dispense beer?",
-    answers: ["Tap", "Coupler", "Shank", ""],
+    answers: ["Tap", "Coupler", "Shank", "Faucet"],
     correctAnswer: "Coupler",
   },
   {
-    qFifteen: "What can you expect to not get from a Milkshake IPA?",
+    q: "What can you expect to not get from a Milkshake IPA?",
     answers: ["Lactose", "Fruit", "Hop bitterness", "Diabetes"],
     correctAnswer: "Hop bitterness",
   },
   {
-    qSixteen: "What does Tetrahydropyridine (THP) taste like?",
-    answers: ["Not that bad!", "Mouse urine", "Hop bitterness", "Diabetes"],
+    q: "What does Tetrahydropyridine (THP) taste like?",
+    answers: [
+      "Not that bad!",
+      "Mouse urine",
+      "Hop bitterness",
+      "'I can't even taste it' - A home brewer after their first sour brew",
+    ],
     correctAnswer: "Mouse urine",
   },
   {
-    qSeventeen: "What does dimethyl sulfide taste like?",
+    q: "What does dimethyl sulfide taste like?",
     answers: ["Cooked vegetables", "Rotten eggs", "Bread", "Peppers"],
     correctAnswer: "Cooked vegetables",
   },
   {
-    qEighteen:
-      "What could you expect to not be in the style guidelines for a saison?",
+    q: "What could you expect to not be in the style guidelines for a saison?",
     answers: ["Anything", "Anything", "Anything", "Isn't made with barley"],
-    correctAnswer: "",
+    correctAnswer: "Isn't made with barley",
   },
   {
-    qNineteen: "Hard seltzers are not:",
+    q: "Hard seltzers are not:",
     answers: [
       "Technically beer",
       "Made from 100% cane/corn sugar",
@@ -161,22 +153,31 @@ const myQuestions = [
     correctAnswer: "Hard to make",
   },
   {
-    qTwenty: "What does isovaleric acid smell like?",
+    q: "What does isovaleric acid smell like?",
     answers: ["Stinky cheese", "Electrical fires", "Strawberries", "Bananas"],
     correctAnswer: "Stinky cheese",
   },
 ];
+for (let i = 0; i < myQuestions.length; i++) {
+  //  gameBoard.innerHTML =
+}
 // bttnOne.addEventListener("click", function)
-
 function startQuiz() {
-  // hide start screen
-  // set score = 0
+  score = 0;
+  //   gameBoard.style.display = "none";
   // display questions
   //start/show timer
   //function = grab the questions
 }
 function getQuestions() {
-  document.querySelector(".gameBoard");
+  //   myQuestions++;
+  //create h1
+  gameBoard.innerHTML = myQuestions[qCounter].q;
+  //create p tag or something with buttons a, b, c, d
+  //Loop answers x4 for each answer associated with each button
+  for (let i = 0; i < length < 5; i++) {
+    gameBoard.innerHTML = myQuestions[qCounter].answers[i];
+  }
   // document.getElementbyID
   //for each function myQuestion.questionOne.answers
   //get current question from array
@@ -187,10 +188,13 @@ function getQuestions() {
   // TODO:create with the questions (div appended)?
 }
 function questionClick() {
-  // compare clicked question with correct answer myQuestion.questionOne.correctAnswer
+  // compare clicked question with correct answer myQuestion.qOne.correctAnswer
 }
 function endQuiz() {
-  // if? (timeLeft = 0) {run this function}
+  if (timeLeft === 0) {
+    scoreBoard.style.display = "block";
+    gameBoard.style.display = "none";
+  }
   //happens when time is up countdownClock
   //hide game board/show the score board
   // scoreBoard.style.display = "block";
@@ -220,3 +224,13 @@ function endQuiz() {
 // TODO: On completion of quiz, total score is displayed and user inputs their name
 // TODO: User's name and score are logged on leader board:
 //     -TODO: Score board is saved to server? (getItem, setItem, JSON.stringify()? and JSON.parse()?).
+
+// TODO: "Start quiz" button starts the quiz on Game Board and hides the button itself.
+startButton.addEventListener("click", function () {
+  startButton.style.display = "none";
+  countdownClock();
+  startQuiz();
+  getQuestions();
+  //startQuiz
+});
+endQuiz();
