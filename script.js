@@ -192,7 +192,7 @@ function onAnswerClick(e) {
     document.getElementById("congrats").textContent = "That was correct!";
   } else {
     // If the user is incorrect, time is taken away from the clock and incorrect is displayed on the screen
-    timeLeft - 5;
+    timeLeft--;
     document.getElementById("congrats").textContent = "That was wrong!";
   }
   qCounter++;
@@ -243,27 +243,3 @@ buttonA.addEventListener("click", onAnswerClick);
 buttonB.addEventListener("click", onAnswerClick);
 buttonC.addEventListener("click", onAnswerClick);
 buttonD.addEventListener("click", onAnswerClick);
-
-// -----------------------
-
-// const testBtn = document.getElementById("test-btn");
-
-// let counter = 0;
-
-// testBtn.addEventListener("click", function (e) {
-//   e.preventDefault();
-//   if (counter < 5) {
-//     console.log(counter);
-//     counter++;
-//   } else {
-//     console.log("We made it out of the loop, bois!!");
-//   }
-// });
-//generate function, closure
-// function questionClick(index) {
-//   return function (e) {
-//     e.preventDefault();
-//     console.log("You pressed button with index", index);
-//   };
-// compare clicked question with correct answer myQuestion.qOne.correctAnswer
-//}

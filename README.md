@@ -2,7 +2,7 @@
 
 **Overview:**
 
-> This is a simple quiz game with the content being the creator's Super Opinionated Beer Trivia. The player must click the start button to begin the game and use the buttons to guess the correct answer. If correct, the player's score is increased. If incorrect, the player is penalized by losing time from the countdown clock. Once the game is complete, either by answering all the questions or the time running out, the player's score is calculated. The user will be asked to enter their name, and it will be placed on the score board along with their score.
+> This is a simple quiz game with the content being the developer's Super Opinionated Beer Trivia. The player must click the start button to begin the game and use the buttons to guess the correct answer. If correct, the player's score is increased. If incorrect, the player is penalized by losing time from the countdown clock. Once the game is complete, either by answering all the questions or the time running out, the player's score is calculated. The user will be asked to enter their name, and it will be placed on the score board along with their score.
 
 **Deployment**
 
@@ -22,8 +22,6 @@
 
 **Preview:**
 
-> <img width="1091" alt="Screen Shot 2020-09-16 at 7 20 34 PM" src="https://user-images.githubusercontent.com/68709356/93412305-c5099380-f851-11ea-99e1-5cb26e243779.png">
-
-**License**
-
->
+<img width="1091" alt="Screen Shot 2020-09-16 at 7 20 34 PM" src="https://user-images.githubusercontent.com/68709356/93412305-c5099380-f851-11ea-99e1-5cb26e243779.png">
+<br>
+<img width="1090" alt="Screen Shot 2020-09-16 at 7 26 09 PM" src="https://user-images.githubusercontent.com/68709356/93412706-888a6780-f852-11ea-920b-68dd8a2d9c1b.png">
