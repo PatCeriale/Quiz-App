@@ -66,7 +66,13 @@ h1 {
   margin: 25px;
   text-align: center;
   font-size: x-large;
-  display: inline-block;
+  display: flex;
   text-decoration: underline;
-  flex: auto;
+  justify-content: center;
+}
+.leaderBoard {
+  color: black;
+}
+#userScore {
+  color: black;
 }

@@ -8,11 +8,12 @@ var buttonB = document.querySelector(".buttonB");
 var buttonC = document.querySelector(".buttonC");
 var buttonD = document.querySelector(".buttonD");
 var startButton = document.querySelector(".startButton");
-var submitBtn = document.querySelector("submitBtn");
+var submitBtn = document.querySelector("#submitBtn");
 var timer = document.querySelector(".timer");
+var userScore = document.querySelector("#userScore");
 var score = 0;
 var qCounter = 0;
-var timeLeft = 3; //TODO: Change back to 75s
+var timeLeft = 40; //TODO: Change back to 75s
 
 // Hide Score Board until quiz is completed,
 scoreBoard.style.display = "none";
@@ -70,7 +71,7 @@ const myQuestions = [
     correctAnswer: "None of the above",
   },
   {
-    q: "What is a Bohemian Pilsner?",
+    q: "What is not a way to describe a Bohemian Pilsner?",
     answers: [
       "Crisp",
       "Refreshing",
@@ -189,12 +190,10 @@ function onAnswerClick(e) {
     // If the user is correct, they are awarded points and correct is displayed on the screen
     score++;
     document.getElementById("congrats").textContent = "That was correct!";
-    console.log("this is correct");
   } else {
     // If the user is incorrect, time is taken away from the clock and incorrect is displayed on the screen
     timeLeft - 5;
     document.getElementById("congrats").textContent = "That was wrong!";
-    console.log("this is incorrect");
   }
   qCounter++;
   if (qCounter < myQuestions.length) {
@@ -211,6 +210,11 @@ function endQuiz() {
     var userName = document.getElementById("submitBtn");
     scoreBoard.style.display = "block";
     gameBoard.style.display = "none";
+    userScore.textContent =
+      "Congratulations your score is " +
+      score +
+      " out of " +
+      myQuestions.length;
   }
 }
 
@@ -218,11 +222,12 @@ function endQuiz() {
 //     -TODO: Score board is saved to local storage? (getItem, setItem, JSON.stringify()? and JSON.parse()?).
 // JSON.stringify();
 //
-// submitBtn.addEventListener("click", function () {
-//   preventDefault();
-//   leaderBoard.style.display = "block";
-// });
-//
+
+submitBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  leaderBoard.style.display = "block";
+});
+
 //get item/set item "class".val
 
 startButton.addEventListener("click", function () {

@@ -22,7 +22,7 @@
 
 **Preview:**
 
->
+> <img width="1091" alt="Screen Shot 2020-09-16 at 7 20 34 PM" src="https://user-images.githubusercontent.com/68709356/93412305-c5099380-f851-11ea-99e1-5cb26e243779.png">
 
 **License**
 
