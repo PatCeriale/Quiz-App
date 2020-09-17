@@ -1,6 +1,7 @@
 var gameBoard = document.querySelector(".gameBoard");
 var scoreBoard = document.querySelector(".scoreBoard");
 var leaderBoard = document.querySelector(".leaderBoard");
+var playerList = document.querySelector(".playerList");
 var question = document.querySelector(".question");
 var answers = document.querySelector(".answers");
 var buttonA = document.querySelector(".buttonA");
@@ -9,11 +10,13 @@ var buttonC = document.querySelector(".buttonC");
 var buttonD = document.querySelector(".buttonD");
 var startButton = document.querySelector(".startButton");
 var submitBtn = document.querySelector("#submitBtn");
+var userName = document.querySelector("#exampleInputName");
 var timer = document.querySelector(".timer");
 var userScore = document.querySelector("#userScore");
 var score = 0;
 var qCounter = 0;
-var timeLeft = 40; //TODO: Change back to 75s
+var timeLeft = 75;
+var players = [];
 
 // Hide Score Board until quiz is completed,
 scoreBoard.style.display = "none";
@@ -223,12 +226,26 @@ function endQuiz() {
 // JSON.stringify();
 //
 
-submitBtn.addEventListener("click", function (e) {
-  e.preventDefault();
-  leaderBoard.style.display = "block";
-});
+// function renderList() {
+//   // Render a new li for each player
+//   for (var i = 0; i < players.length; i++) {
+//     var player = players[i];
+//   }
+//   var li = document.createElement("li");
+//   li.textContent = player;
+//   li.setAttribute("data-index", i);
 
-//get item/set item "class".val
+//   playerList.appendChild(li);
+// }
+
+// submitBtn.addEventListener("submit", function () {
+//   preventDefault();
+//   var userNameText = userName.Value.trim();
+//   leaderBoard.style.display = "block";
+//   if (userNameText === "") {
+//     return;
+//   }
+// });
 
 startButton.addEventListener("click", function () {
   startButton.style.display = "none";
@@ -237,6 +254,7 @@ startButton.addEventListener("click", function () {
   countdownClock();
   getQuestions();
   endQuiz();
+  //TODO: renderList();
 });
 
 buttonA.addEventListener("click", onAnswerClick);

@@ -9,7 +9,6 @@ body {
 }
 
 h1 {
-  /* star wars font */
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bolder;
   text-align: center;
@@ -52,7 +51,6 @@ h1 {
   margin: 25px;
   text-align: center;
   font-size: x-large;
-  /* display: inline-block; */
   text-decoration: underline;
 }
 .quizButton {
