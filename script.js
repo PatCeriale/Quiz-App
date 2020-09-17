@@ -1,5 +1,6 @@
 var gameBoard = document.querySelector(".gameBoard");
 var scoreBoard = document.querySelector(".scoreBoard");
+var leaderBoard = document.querySelector(".leaderBoard");
 var question = document.querySelector(".question");
 var answers = document.querySelector(".answers");
 var buttonA = document.querySelector(".buttonA");
@@ -7,28 +8,31 @@ var buttonB = document.querySelector(".buttonB");
 var buttonC = document.querySelector(".buttonC");
 var buttonD = document.querySelector(".buttonD");
 var startButton = document.querySelector(".startButton");
+var submitBtn = document.querySelector("submitBtn");
 var timer = document.querySelector(".timer");
 var score = 0;
 var qCounter = 0;
 var timeLeft = 3; //TODO: Change back to 75s
 
-// Hide Score Board container until quiz is completed, hide answer buttons until quiz is started
+// Hide Score Board until quiz is completed,
 scoreBoard.style.display = "none";
+// Hide Leader Board until user inputs name
+leaderBoard.style.display = "none";
+// Hide answer buttons until quiz is started
 answers.style.display = "none";
-// Set up countdown timer that stops at "timeLeft"
+// Set up countdown timer that ends game when time is up
 function countdownClock() {
   var timerInterval = setInterval(function () {
     timeLeft--;
     timer.textContent = "Time remaining: " + timeLeft;
-
+    //launch Score Board function();
     if (timeLeft === 0) {
       clearInterval(timerInterval);
-      //launch Score Board function();
+      endQuiz();
     }
   }, 1000);
 }
 
-// TODO: (Loop) Display multiple choice question and answer:
 const myQuestions = [
   {
     q: "What is not a style guideline of a West Coast India Pale Ale?",
@@ -165,44 +169,31 @@ const myQuestions = [
     correctAnswer: "Stinky cheese",
   },
 ];
-for (let i = 0; i < myQuestions.length; i++) {
-  //  gameBoard.innerHTML =
-}
-// bttnOne.addEventListener("click", function)
-function startQuiz() {
-  //   gameBoard.style.display = "none";
-  // display questions
-  //start/show timer
-  //function = grab the questions
-}
+
 function getQuestions() {
-  //Places the current question in the h1 on Game Board and answers to a corresponding and clickable button
+  //Places the current question in the h1 on Game Board and answers to a corresponding and clickable button. Sourced from myQuestions array
   question.innerHTML = myQuestions[qCounter].q;
   buttonA.textContent = myQuestions[qCounter].answers[0];
   buttonB.textContent = myQuestions[qCounter].answers[1];
   buttonC.textContent = myQuestions[qCounter].answers[2];
   buttonD.textContent = myQuestions[qCounter].answers[3];
-  //Loop answers x4 for each answer associated with each button?
-
-  //for each function myQuestion.questionOne.answers
-  //get current question from array
-  //show questions, title
-  //look over choices
-  //display to page
-  // TODO:buttons exist on page prior to question?
-  // TODO:create with the questions (div appended)?
 }
 
 function onAnswerClick(e) {
+  // Compares the correct answer to the user's input
   e.preventDefault();
   const index = e.target.getAttribute("data-index");
   if (
     myQuestions[qCounter].correctAnswer === myQuestions[qCounter].answers[index]
   ) {
+    // If the user is correct, they are awarded points and correct is displayed on the screen
     score++;
+    document.getElementById("congrats").textContent = "That was correct!";
     console.log("this is correct");
   } else {
+    // If the user is incorrect, time is taken away from the clock and incorrect is displayed on the screen
     timeLeft - 5;
+    document.getElementById("congrats").textContent = "That was wrong!";
     console.log("this is incorrect");
   }
   qCounter++;
@@ -214,49 +205,33 @@ function onAnswerClick(e) {
 }
 
 function endQuiz() {
+  // Fires when time is up countdownClock
+  //Game Board is hidden, Score Board is shown
   if (timeLeft === 0) {
+    var userName = document.getElementById("submitBtn");
     scoreBoard.style.display = "block";
     gameBoard.style.display = "none";
   }
-  //happens when time is up countdownClock
-  //hide game board/show the score board
 }
 
-// scoreBoard contain form for user name
-//create leaderBoard
+// TODO: User's name and score are logged on leader board:
+//     -TODO: Score board is saved to local storage? (getItem, setItem, JSON.stringify()? and JSON.parse()?).
+// JSON.stringify();
+//
+// submitBtn.addEventListener("click", function () {
+//   preventDefault();
+//   leaderBoard.style.display = "block";
+// });
+//
 //get item/set item "class".val
 
-//     -TODO: Add points to the user's score when answered correctly. Reduce the time left by 10 seconds if answered incorrectly. Display whether the answer is answered correctly or not
-// var correct = gameBoard.innerHTML
-// var incorrect = gameBoard.innerHTML
-// if(answer === true){
-//     display correct;
-//     score + 100;
-// }else {
-//     display incorrect;
-//     timeLeft -5;
-// }
-//     -TODO: Repeat loop to move to next question
-// TODO: When timer equals zero, the quiz is finished, show the user end of game screen
-///////////////////////////////////////////////////////////////
-// TODO: Hide Game Board, show Score Board
-// scoreBoard.style.display = "block";
-// gameBoard.style.display = "none";
-// TODO: On completion of quiz, total score is displayed and user inputs their name
-// TODO: User's name and score are logged on leader board:
-//     -TODO: Score board is saved to server? (getItem, setItem, JSON.stringify()? and JSON.parse()?).
-
-// TODO: "Start quiz" button starts the quiz on Game Board and hides the button itself.
 startButton.addEventListener("click", function () {
-  score = 0;
   startButton.style.display = "none";
   gameBoard.style.background = "white";
   answers.style.display = "block";
   countdownClock();
-  startQuiz();
   getQuestions();
   endQuiz();
-  //startQuiz
 });
 
 buttonA.addEventListener("click", onAnswerClick);
