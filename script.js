@@ -1,7 +1,7 @@
 var gameBoard = document.querySelector(".gameBoard");
 var scoreBoard = document.querySelector(".scoreBoard");
 var leaderBoard = document.querySelector(".leaderBoard");
-var playerList = document.querySelector(".playerList");
+var scoreList = document.querySelector("#scoreList");
 var question = document.querySelector(".question");
 var answers = document.querySelector(".answers");
 var buttonA = document.querySelector(".buttonA");
@@ -13,10 +13,10 @@ var submitBtn = document.querySelector("#submitBtn");
 var userName = document.querySelector("#exampleInputName");
 var timer = document.querySelector(".timer");
 var userScore = document.querySelector("#userScore");
-var score = 0;
+// var score = 0;
+var playerScore = 0;
 var qCounter = 0;
 var timeLeft = 75;
-var players = [];
 
 // Hide Score Board until quiz is completed,
 scoreBoard.style.display = "none";
@@ -30,7 +30,7 @@ function countdownClock() {
     timeLeft--;
     timer.textContent = "Time remaining: " + timeLeft;
     //launch Score Board function();
-    if (timeLeft === 0) {
+    if (timeLeft <= 0) {
       clearInterval(timerInterval);
       endQuiz();
     }
@@ -191,11 +191,11 @@ function onAnswerClick(e) {
     myQuestions[qCounter].correctAnswer === myQuestions[qCounter].answers[index]
   ) {
     // If the user is correct, they are awarded points and correct is displayed on the screen
-    score++;
+    playerScore++;
     document.getElementById("congrats").textContent = "That was correct!";
   } else {
     // If the user is incorrect, time is taken away from the clock and incorrect is displayed on the screen
-    timeLeft--;
+    timeLeft - 5;
     document.getElementById("congrats").textContent = "That was wrong!";
   }
   qCounter++;
@@ -215,9 +215,10 @@ function endQuiz() {
     gameBoard.style.display = "none";
     userScore.textContent =
       "Congratulations your score is " +
-      score +
+      playerScore +
       " out of " +
       myQuestions.length;
+    endGame();
   }
 }
 
@@ -225,27 +226,39 @@ function endQuiz() {
 //     -TODO: Score board is saved to local storage? (getItem, setItem, JSON.stringify()? and JSON.parse()?).
 // JSON.stringify();
 //
+// TODO: figure out how to do this............
+//
+//grab local storage stored score array
+//parse turns back into object
+//at end of game add score to stored scores array
+//stringify
+//setItem / save item
+var storedScores = localStorage.getItem("scores");
 
-// function renderList() {
-//   // Render a new li for each player
-//   for (var i = 0; i < players.length; i++) {
-//     var player = players[i];
-//   }
-//   var li = document.createElement("li");
-//   li.textContent = player;
-//   li.setAttribute("data-index", i);
+function endGame() {
+  var userInits = prompt("Please enter your name: ");
+  var userObj = {
+    userInits: userInits,
+    userScore: playerScore,
+  };
 
-//   playerList.appendChild(li);
-// }
+  if (storedScores) {
+    storedScores = JSON.parse(storedScores);
+  } else {
+    storedScores = [];
+  }
 
-// submitBtn.addEventListener("submit", function () {
-//   preventDefault();
-//   var userNameText = userName.Value.trim();
-//   leaderBoard.style.display = "block";
-//   if (userNameText === "") {
-//     return;
-//   }
-// });
+  var li = document.createElement("li");
+  var textNode = document.createTextNode(`${userInits} -- ${playerScore}`);
+  storedScores.forEach((score) => {
+    scoreList.appendChild(li);
+  });
+
+  storedScores.push(userObj);
+
+  localStorage.setItem("scores", JSON.stringify(storedScores));
+  console.log(storedScores);
+}
 
 startButton.addEventListener("click", function () {
   startButton.style.display = "none";
@@ -254,7 +267,6 @@ startButton.addEventListener("click", function () {
   countdownClock();
   getQuestions();
   endQuiz();
-  //TODO: renderList();
 });
 
 buttonA.addEventListener("click", onAnswerClick);
